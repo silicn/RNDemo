@@ -10,7 +10,7 @@ import {
 class DetailsScreen extends React.Component {
 
     static navigationOptions = {  
-        title: 'Detail',//在导航中显示的标题内容
+        title: '消息',//在导航中显示的标题内容
         };
 
     render() {
@@ -29,12 +29,7 @@ const styles = StyleSheet.create({
     },
 })
 
-// export default DetailsScreen;
-
 module.exports = DetailsScreen;
-
-  
-// export default createAppContainer(AppNavigator);
 
 
 

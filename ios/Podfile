@@ -27,20 +27,9 @@ target 'RNProductProj' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'RNProductProjTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+
 
   use_native_modules!
 end
 
-target 'RNProductProj-tvOS' do
-  # Pods for RNProductProj-tvOS
 
-  target 'RNProductProj-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end
