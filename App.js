@@ -15,6 +15,7 @@ var homeIcon = require('./myimages/1.png');
 
 
 import DetailsScreen from './Componts/Home'
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 var MeScreen = require('./Componts/Me');
 
@@ -29,16 +30,16 @@ class LogoTitle extends React.Component{
 }
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions =  ({navigation, screenProps})=>({
     title:'首页',
     headerRight: (
       <Button
-        onPress = {()=>this.navigation.params.navigatePress()}
+        onPress = {()=>navigation.state.params.navigatePress()}
         title ="下一页"
         style = {{marginRight:8,backgroundColor:'cyan',marginRight:10}}
       />
     ),
-  };
+  });
 
   constructor(props){
     super(props);
@@ -50,55 +51,64 @@ class HomeScreen extends React.Component {
 
   renderItem(rowData){
     return(
+      <TouchableOpacity 
+      onPress = {this._onPress.bind(this)}
+      >
       <View style = {styles.cell}>
-        <Image style = {{width:40,height:40,backgroundColor:"red",alignItems:"center"}}
+        <Image style = {{width:40,height:40,backgroundColor:"red",alignItems:"center",marginTop:8,marginLeft:8,position:'absolute'}}
         ></Image>
-        <Text>{rowData.key}</Text>
+        <View style = {{marginLeft:56,marginRight:8}} flexDirection='column'>
+           <Text numberOfLines = {0} color = 'black'  alignItems='flex-start' >{rowData.key}</Text>
+           <Text style = {{color:'gray',fontFamily:'Helvetica'}} numberOfLines ={0} >{rowData.key}</Text>
+        </View>
+        
       </View>
+      </TouchableOpacity>
     )
   }
 
   componentDidMount(){
-    this.props.navigation.setParams({navigatePress:this._onPress});
+    this.props.navigation.setParams({navigatePress:this.navigatePress});
     this.fetchData();
   }
 
-  fetchData(){
-    this.setState({
-      dataSource: [
-        {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-      ]
-    })
-  }
-
     _onPress(){
-      // this.props.navigation.navigate('Home_Des');
       const { navigate } = this.props.navigation;//跳转页面
       navigate('Home_Des');
     }
+
+    navigatePress = ()=>{
+      const { navigate } = this.props.navigation;//跳转页面
+      navigate('Home_Des');
+    }
+
+    fetchData(){
+      this.setState({
+        dataSource: [
+          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
+        ]
+      })
+    }
+
   render() {
     return (
       <View style={{ flex: 1}}>
@@ -106,11 +116,6 @@ class HomeScreen extends React.Component {
         <FlatList style = {styles.listView}
         data = {this.state.dataSource}
         renderItem = {({item})=>this.renderItem(item)}
-        />
-
-        <Button
-          title="Go to Details"
-          onPress={this._onPress.bind(this)}
         />
       </View>
     );
@@ -126,10 +131,8 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     backgroundColor:'white',
     marginLeft:8,
-    marginRight:8,
     marginTop:8,
-    height:50,
-    alignItems:"flex-start",
+    height:'auto',
   },
 });
 
