@@ -44,3 +44,7 @@ promise1.then(()=>{
     console.log('then');
 });
 
+var str = "你好啊";
+
+str.substr(2)
+

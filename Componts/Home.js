@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {
     Text,
   StyleSheet,
+  Button,
   View,
+  TextInput,
 } from 'react-native';
 
 
@@ -16,7 +18,10 @@ class DetailsScreen extends React.Component {
     render() {
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Details Screen</Text>
+          <Button title = '登陆'></Button>
+          <TextInput style = {{borderWidth:0.5,borderRadius:5,width:100}}>
+            不直达
+          </TextInput>
         </View>
       );
     }

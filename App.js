@@ -9,7 +9,6 @@
 import React from "react";
 import { View, Text,Button,Alert ,Image,FlatList,StyleSheet} from "react-native";
 import { createStackNavigator, createAppContainer,createBottomTabNavigator } from "react-navigation";
-// import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 var homeIcon = require('./myimages/1.png');
 
@@ -46,7 +45,6 @@ class HomeScreen extends React.Component {
     this.state = {
       dataSource:[]
     };
-    // this._onPress = this._onPress.bind(this);
   }
 
   renderItem(rowData){
@@ -59,9 +57,8 @@ class HomeScreen extends React.Component {
         ></Image>
         <View style = {{marginLeft:56,marginRight:8}} flexDirection='column'>
            <Text numberOfLines = {0} color = 'black'  alignItems='flex-start' >{rowData.key}</Text>
-           <Text style = {{color:'gray',fontFamily:'Helvetica'}} numberOfLines ={0} >{rowData.key}</Text>
+           <Text style = {{color:'gray',fontFamily:'Helvetica',marginTop:8,marginBottom:8}} numberOfLines ={0} >{rowData.key}</Text>
         </View>
-        
       </View>
       </TouchableOpacity>
     )
@@ -125,7 +122,7 @@ class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   listView:{
-    backgroundColor:'cyan',
+    backgroundColor:'white',
   },
   cell:{
     flexDirection:'row',
@@ -133,6 +130,8 @@ const styles = StyleSheet.create({
     marginLeft:8,
     marginTop:8,
     height:'auto',
+    borderBottomColor:'#cbcbcb',
+    borderBottomWidth:0.5,
   },
 });
 
