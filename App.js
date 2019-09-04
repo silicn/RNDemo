@@ -12,9 +12,11 @@ import { createStackNavigator, createAppContainer,createBottomTabNavigator } fro
 import Icon from 'react-native-vector-icons/Ionicons';
 var homeIcon = require('./myimages/1.png');
 
+import detail from './Componts/home_detail';
 
 import DetailsScreen from './Componts/Home'
 import { TouchableOpacity } from "react-native-gesture-handler";
+
 
 var MeScreen = require('./Componts/Me');
 
@@ -43,76 +45,86 @@ class HomeScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      dataSource:[]
+      dataSource:[],
+      refreshing:false,
     };
   }
 
   renderItem(rowData){
+    let data = rowData;
     return(
       <TouchableOpacity 
-      onPress = {this._onPress.bind(this)}
+      onPress = {()=>this._select_row(rowData)}
       >
       <View style = {styles.cell}>
-        <Image style = {{width:40,height:40,backgroundColor:"red",alignItems:"center",marginTop:8,marginLeft:8,position:'absolute'}}
+        <Image 
+        style = {styles.avatar}
         ></Image>
         <View style = {{marginLeft:56,marginRight:8}} flexDirection='column'>
-           <Text numberOfLines = {0} color = 'black'  alignItems='flex-start' >{rowData.key}</Text>
-           <Text style = {{color:'gray',fontFamily:'Helvetica',marginTop:8,marginBottom:8}} numberOfLines ={0} >{rowData.key}</Text>
+           <Text numberOfLines = {0} color = 'black'  alignItems='flex-start' >{rowData.title}</Text>
+           <Text style = {{color:'gray',fontFamily:'Helvetica',marginTop:8,marginBottom:8}} numberOfLines ={3} >{rowData.content}</Text>
         </View>
+        
       </View>
-      </TouchableOpacity>
+     </TouchableOpacity>
     )
   }
 
-  componentDidMount(){
-    this.props.navigation.setParams({navigatePress:this.navigatePress});
-    this.fetchData();
+  
+  _select_row(rowData){
+    const { navigate } = this.props.navigation;//跳转页面
+    navigate('home_detail',{'title':rowData.title,'content':rowData.content});
+    // Alert.alert('select');
   }
 
     _onPress(){
-      const { navigate } = this.props.navigation;//跳转页面
-      navigate('Home_Des');
     }
 
     navigatePress = ()=>{
+      console.log('在吗');
       const { navigate } = this.props.navigation;//跳转页面
-      navigate('Home_Des');
+      navigate('home_detail');
+    }
+    componentDidMount(){
+      this.props.navigation.setParams({navigatePress:this.navigatePress});
+      this.rquest_data();
     }
 
-    fetchData(){
+    rquest_data(){
+
       this.setState({
-        dataSource: [
-          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-          {key:'小哈小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到小哈dasdasodj到家都安静大师大街上街道上到家啊搜到骄傲是大瑟吉欧到家啊搜到骄傲圣诞节啊搜到'},
-        ]
-      })
-    }
+        refreshing:true,
+      });
+
+      let url = 'https://www.ratjin.com/rat/topic/list';
+      let fetchOptions = {
+        method:'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json',
+        }
+    };
+    fetch(url,fetchOptions)
+    .then((response)=>response.json())
+    .then((responseData) =>{
+     this.setState({
+       refreshing:false,
+       dataSource:responseData.list,
+     });
+    });
+    };
+
+
+  
 
   render() {
     return (
       <View style={{ flex: 1}}>
-
         <FlatList style = {styles.listView}
         data = {this.state.dataSource}
         renderItem = {({item})=>this.renderItem(item)}
+        refreshing = {this.state.refreshing}
+        onRefresh = {()=>this.rquest_data()}
         />
       </View>
     );
@@ -133,6 +145,14 @@ const styles = StyleSheet.create({
     borderBottomColor:'#cbcbcb',
     borderBottomWidth:0.5,
   },
+  avatar:{width:40,
+    height:40,
+    backgroundColor:"cyan",
+    alignItems:"center",
+    marginLeft:8,
+    position:'absolute',
+    borderRadius:5,
+  },
 });
 
 
@@ -140,7 +160,10 @@ const styles = StyleSheet.create({
 const HomeNavScreen = createStackNavigator(
   {
     Home: HomeScreen,
-    Home_Des:DetailsScreen,
+    home_detail:detail,
+  },
+  {
+    initialRouteName:'Home',
   }
 );
 

@@ -11,6 +11,13 @@ import PropTypes from "prop-types";
 
 class MeCells extends React.Component{
 
+    static propTypes = {
+        itemName:PropTypes.string,
+    }
+
+    static defaultProps = {
+        itemName:undefined,
+    }
     
     constructor(props){
         super(props);
@@ -18,13 +25,15 @@ class MeCells extends React.Component{
     }
 
     render(){
+        const {itemName} = this.props;
+
         return(
             <TouchableOpacity
             onPress = {()=>{Alert.alert('点击设置')}}
             >
             <View style = {styles.content}>
                 <Image style={styles.image} source={require('../myimages/1.png')}></Image>
-                <View style = {styles.titles}><Text>{this.props.itemName?this.props.itemName:'设置标题'}</Text></View>
+                <View style = {styles.titles}><Text>{itemName?itemName:'设置标题'}</Text></View>
             </View>
             </TouchableOpacity>
         )

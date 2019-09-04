@@ -4,11 +4,10 @@ import {
   StyleSheet,
   View,
   FlatList,
+  RefreshControl,
   Alert,
 } from 'react-native';
 import Cell from './MeCell';
-
-
 
 
 class MeScreen extends React.Component {
@@ -18,6 +17,7 @@ class MeScreen extends React.Component {
       dataSource:[],
       refreshing:false,
     };
+    // this._onRefresh = this._onRefresh.bind(this);
   }
   static navigationOptions = {  
     title: '我',//在导航中显示的标题内容
@@ -43,25 +43,51 @@ class MeScreen extends React.Component {
       <Cell itemName = {rowData.key}></Cell>
     );
   }
+
+  footerItem(){
+    let count = this.state.dataSource.count;
+    let str = count > 5?'没有数据了':'更多数据';
+    return(
+      <View style={{alignItems:'center',justifyContent:'center',marginTop:10}}>
+        <Text>{str}</Text>
+      </View>
+    );
+  }
   // 下拉刷新
-  _onRefresh(){  
+  __onRefresh(){  
+    
     this.setState({
       refreshing:true,
     });
-    Alert.alert('刷新');
+
+    setTimeout(() => {
+      this.setState({
+      refreshing:false,
+      dataSource:[
+        {key:'小张'},
+        {key:'小三'},
+        {key:'小四'},
+        {key:'小五'},
+        {key:'老六'},
+        {key:'老六'},
+        {key:'老六'},
+        {key:'老六'},
+      ],
+    });
+    }, 3000);
   }
 
         
 
     render() {
       return (
-        // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <FlatList
           style = {styles.containor}
           data = {this.state.dataSource}
           renderItem = {({item})=>this.renderItem(item)}
-          onRefresh = {()=>this._onRefresh.bind(this)}
+          onRefresh = {()=>this.__onRefresh()}
           refreshing = {this.state.refreshing}
+          ListFooterComponent = {()=>this.footerItem()}
           />
         // </View>
       );
